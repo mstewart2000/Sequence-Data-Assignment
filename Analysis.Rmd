@@ -5,6 +5,7 @@ date: "16/02/2022"
 output:
   pdf_document: default
   html_document: default
+GitHub Link: https://github.com/mstewart2000/Sequence-Data-Assignment
 ---
 
 Initial Setup
@@ -17,6 +18,7 @@ library(knitr)
 Import Sequences file and create shorthand name for use in tables
 ```{r}
 data = read.csv("Sequences.csv")
+ChartNames = ncbi_ids
 ```
 
 This section of code will count the number of each base pair in each of the three sequences
@@ -25,13 +27,13 @@ countA = 0; countT = 0; countG = 0; countC = 0
 for (i in 1:length(data$X)) {
   countA = 0; countT = 0; countG = 0; countC = 0
   countA = str_count(data$Sequence[i], "A")
-  print(paste("There are ", countA, " A nucelotides in sequence", data$Name[i]))
+  print(paste("There are ", countA, " A nucelotides in sequence", ChartNames[i]))
   countT = str_count(data$Sequence[i], "T")
-  print(paste("There are ", countT, " T nucelotides in sequence", data$Name[i]))
+  print(paste("There are ", countT, " T nucelotides in sequence", ChartNames[i]))
   countG = str_count(data$Sequence[i], "G")
-  print(paste("There are ", countG, " G nucelotides in sequence", data$Name[i]))
+  print(paste("There are ", countG, " G nucelotides in sequence", ChartNames[i]))
   countC = str_count(data$Sequence[i], "C")
-  print(paste("There are ", countC, " A nucelotides in sequence", data$Name[i]))
+  print(paste("There are ", countC, " A nucelotides in sequence", ChartNames[i]))
 }
   
 ```
@@ -51,13 +53,13 @@ NumberofG = c(str_count(data$Sequence[1], "G"), str_count(data$Sequence[2], "G")
 
 NumberofC = c(str_count(data$Sequence[1], "C"), str_count(data$Sequence[2], "C"), str_count(data$Sequence[3], "C"))
 
-NucTable = data.frame(Name = header, A = NumberofA, T = NumberofT, G = NumberofG, C = NumberofC)
+NucTable = data.frame(Name = ChartNames, A = NumberofA, T = NumberofT, G = NumberofG, C = NumberofC)
 print(NucTable)
 ```
 
 This section will calculate the GC content of each sequence in a percentage
 ```{r}
-GCTable = data.frame(Sequence.ID = header, GC.Content = c(0, 0, 0)) 
+GCTable = data.frame(Sequence.ID = ChartNames, GC.Content = c(0, 0, 0)) 
 countA = 0; countT = 0; countG = 0; countC = 0
 for (i in 1:length(data$X)) {
   countA = 0; countT = 0; countG = 0; countC = 0; temp1 = 0
